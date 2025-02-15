@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link href="../output.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex items-center justify-center p-4">
+
+	<div class="w-full max-w-md bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8 border border-gray-200">
+		<!-- Logo & Title -->
+		<div class="text-center mb-6">
+			<img class="mx-auto" src="../public/app-logo.png" loading="lazy" height="50px" width="200px" alt="App Logo">
+			<h2 class="text-3xl font-extrabold text-gray-800">Account Login</h2>
+			<p class="text-gray-500">Enter your credentials to access your account
+
+			</p>
+		</div>
+
+		<!-- Login Form -->
+		<form action="#" method="post" class="space-y-5">
+			<!-- Email -->
+			<div>
+				<label class="block text-gray-700 font-medium">Email</label>
+				<div class="relative">
+					<input name="email" type="email" placeholder="Enter your email"
+						class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all">
+				</div>
+			</div>
+
+			<!-- Password -->
+			<div>
+				<label class="block text-gray-700 font-medium flex justify-between">
+					<span>Password</span>
+					<a href="#" class="text-blue-500 text-sm hover:underline">Forgot Password?</a>
+				</label>
+				<div class="relative">
+					<input name="password" type="password" placeholder="Enter your password"
+						class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition-all">
+				</div>
+			</div>
+
+			<!-- Login Button -->
+			<button type="submit"
+				class="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold py-2 rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
+				Login
+			</button>
+		</form>
+
+		<!-- Register Link -->
+		<p class="text-center mt-4 text-gray-600">
+			Don't have an account?
+			<a href="register.html" class="text-blue-500 font-semibold hover:underline">Register</a>
+		</p>
+	</div>
+
+</body>
+
+</html>
