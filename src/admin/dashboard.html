@@ -28,7 +28,8 @@
 				<!-- Sidebar Links -->
 				<ul class="space-y-[1px]">
 					<li>
-						<a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded">
+						<a href="#" onclick="loadDashboard()"
+							class="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded">
 							<svg class="lucide text-primary lucide-chart-pie w-6 h-6  mr-2"
 								xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 								fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -113,7 +114,8 @@
 						</a>
 
 					<li>
-						<a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded">
+						<a href="#" onclick="loadPaymentMethod()"
+							class="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded">
 							<svg class="mr-2 w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
@@ -210,9 +212,6 @@
 						</a>
 					</li>
 				</ul>
-
-
-
 			</div>
 		</aside>
 
@@ -270,7 +269,7 @@
 			</header>
 
 			<!-- Main Content Area -->
-			<main class="pt-24 px-6">
+			<main id="dynamicContent" class="pt-20 px-6">
 
 				<!-- cards -->
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -699,55 +698,63 @@
 						</table>
 					</div>
 				</div>
-
-
-
-
-				<!-- Ticket System Table -->
-				<!-- <div class="card bg-white shadow-lg p-4 mt-6">
-					<div class="flex justify-between items-center mb-4">
-						<h2 class="card-title text-xl font-bold">Pending Support Tickets</h2>
-						<a href="#" class=" bg-blue-500 text-sm text-white p-1 rounded-md hover:bg-blue-600">View More
-							→</a>
-					</div>
-					<div class="overflow-x-auto">
-						<table class="table w-full">
-							<thead>
-								<tr class="bg-gray-100">
-									<th class="px-4 py-2">Ticket ID</th>
-									<th class="px-4 py-2">User</th>
-									<th class="px-4 py-2">Subject</th>
-									<th class="px-4 py-2">Status</th>
-									<th class="px-4 py-2">Last Updated</th>
-									<th class="px-4 py-2">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="px-4 py-2">#12345</td>
-									<td class="px-4 py-2">user1@example.com</td>
-									<td class="px-4 py-2">Login Issue</td>
-									<td class="px-4 py-2"><span class="badge bg-yellow-500 text-white">Pending</span>
-									</td>
-									<td class="px-4 py-2">Oct 15, 2023, 10:30 AM</td>
-									<td class="px-4 py-2"><a href="#"
-											class=" bg-blue-500 text-white hover:bg-blue-600">View</a>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div> -->
-
 			</main>
 		</div>
 	</div>
 
 
 
-	<!-- Chart.js Scripts -->
+
+
 	<script>
-		document.addEventListener("DOMContentLoaded", function () {
+		// Initialize Lucide icons
+		lucide.createIcons();
+
+		// DOM elements
+		const sidebar = document.getElementById('sidebar');
+		const mainContent = document.getElementById('mainContent');
+		const header = document.getElementById('header');
+		const sidebarToggle = document.getElementById('sidebarToggle');
+		const toggleIcon = document.getElementById('toggleIcon');
+
+		let isSidebarOpen = true;
+
+		// Update layout dimensions
+		// Update layout dimensions
+		function updateLayout() {
+			if (isSidebarOpen) {
+				sidebar.style.width = '16rem';
+				sidebar.style.visibility = 'visible';
+				sidebar.style.opacity = '1';
+				mainContent.style.marginLeft = '16rem';
+				header.style.left = '16rem';
+			} else {
+				sidebar.style.width = '0rem';
+				sidebar.style.visibility = 'hidden';
+				sidebar.style.opacity = '0';
+				mainContent.style.marginLeft = '0rem';
+				header.style.left = '0rem';
+			}
+
+			toggleIcon.setAttribute('data-lucide', isSidebarOpen ? 'chevron-left' : 'chevron-right');
+			lucide.createIcons();
+		}
+
+
+		// Toggle sidebar
+		sidebarToggle.addEventListener('click', () => {
+			isSidebarOpen = !isSidebarOpen;
+			updateLayout();
+		});
+
+		// Initial layout setup
+		updateLayout();
+	</script>
+
+	<!-- for page  loading -->
+	<script>
+		// Function to initialize charts
+		function initializeCharts() {
 			// Monthly Transactions Chart
 			const transactionChart = new Chart(document.getElementById('transactionChart'), {
 				type: 'line',
@@ -797,52 +804,70 @@
 				},
 				options: { responsive: true, maintainAspectRatio: true }
 			});
+		}
+
+		// Function to load payment.html content
+		async function loadPaymentMethod() {
+			try {
+				// Fetch the payment.html file
+				const response = await fetch('payment.html');
+				if (!response.ok) {
+					throw new Error('Failed to load payment.html');
+				}
+				const htmlContent = await response.text();
+
+				const dynamicContent = document.getElementById('dynamicContent');
+				dynamicContent.innerHTML = htmlContent;
+			} catch (error) {
+				console.error('Error loading payment.html:', error);
+			}
+		}
+
+		// Function to restore original content when Dashboard is clicked
+		function loadDashboard() {
+			const dynamicContent = document.getElementById('dynamicContent');
+			dynamicContent.innerHTML = dynamicContent.dataset.originalContent; // Restore original content
+			initializeCharts(); // Reinitialize charts
+		}
+
+		// Initialize charts on page load
+		document.addEventListener("DOMContentLoaded", () => {
+			const dynamicContent = document.getElementById('dynamicContent');
+			dynamicContent.dataset.originalContent = dynamicContent.innerHTML; // Save original content
+			initializeCharts(); // Initialize charts for the first time
 		});
 	</script>
 
 	<script>
-		// Initialize Lucide icons
-		lucide.createIcons();
-
-		// DOM elements
-		const sidebar = document.getElementById('sidebar');
-		const mainContent = document.getElementById('mainContent');
-		const header = document.getElementById('header');
-		const sidebarToggle = document.getElementById('sidebarToggle');
-		const toggleIcon = document.getElementById('toggleIcon');
-
-		let isSidebarOpen = true;
-
-		// Update layout dimensions
-		// Update layout dimensions
-		function updateLayout() {
-			if (isSidebarOpen) {
-				sidebar.style.width = '16rem';
-				sidebar.style.visibility = 'visible';
-				sidebar.style.opacity = '1';
-				mainContent.style.marginLeft = '16rem';
-				header.style.left = '16rem';
-			} else {
-				sidebar.style.width = '0rem';
-				sidebar.style.visibility = 'hidden';
-				sidebar.style.opacity = '0';
-				mainContent.style.marginLeft = '0rem';
-				header.style.left = '0rem';
-			}
-
-			toggleIcon.setAttribute('data-lucide', isSidebarOpen ? 'chevron-left' : 'chevron-right');
-			lucide.createIcons();
+		// Open Add Currency Modal
+		function openAddCurrencyModal() {
+			document.getElementById("addCurrencyModal").showModal();
 		}
 
+		// Add Currency
+		function addCurrency() {
+			const form = document.getElementById("addCurrencyForm");
+			const currencyCode = form.currencyCode.value;
+			const fees = form.fees.value;
+			const feesType = form.feesType.value;
 
-		// Toggle sidebar
-		sidebarToggle.addEventListener('click', () => {
-			isSidebarOpen = !isSidebarOpen;
-			updateLayout();
-		});
+			currencies.push({ code: currencyCode, name: currencyCode, fees, feesType });
+			renderCurrencies();
+			document.getElementById("addCurrencyModal").close();
+		}
 
-		// Initial layout setup
-		updateLayout();
+		// Open Remove Currency Modal
+		function openRemoveCurrencyModal(code) {
+			document.getElementById("removeCurrencyModal").showModal();
+			document.getElementById("confirmRemove").onclick = () => {
+				currencies.splice(currencies.findIndex(c => c.code === code), 1);
+				renderCurrencies();
+				document.getElementById("removeCurrencyModal").close();
+			};
+		}
+
+		// Initial Render
+		renderCurrencies();
 	</script>
 </body>
 
