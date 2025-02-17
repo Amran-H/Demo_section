@@ -145,7 +145,8 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded">
+						<a href="#" onclick="loadSettings()"
+							class="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded">
 							<svg class="mr-2 w-6 h-6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="24"
 								height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
 								stroke-linecap="round" stroke-linejoin="round">
@@ -820,6 +821,22 @@
 				dynamicContent.innerHTML = htmlContent;
 			} catch (error) {
 				console.error('Error loading payment.html:', error);
+			}
+		}
+		// Function to load settings.html content
+		async function loadSettings() {
+			try {
+				// Fetch the payment.html file
+				const response = await fetch('settings.html');
+				if (!response.ok) {
+					throw new Error('Failed to load settings.html');
+				}
+				const htmlContent = await response.text();
+
+				const dynamicContent = document.getElementById('dynamicContent');
+				dynamicContent.innerHTML = htmlContent;
+			} catch (error) {
+				console.error('Error loading settings.html:', error);
 			}
 		}
 
