@@ -73,7 +73,8 @@
 						</a>
 					</li>
 					<li>
-						<a href="#" class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-gray-100">
+						<a href="#" onclick="loadExchangeCoin()"
+							class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-gray-100">
 							<svg class=" w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
@@ -88,7 +89,8 @@
 
 					<!-- Staking -->
 					<li>
-						<a href="#" class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-gray-100">
+						<a href="#" onclick="loadStaking()"
+							class="flex items-center p-2 text-gray-700 rounded-lg hover:bg-gray-100">
 							<svg class=" w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
 								stroke-linecap="round" stroke-linejoin="round">
@@ -642,7 +644,7 @@
 		// Function to load coinPurchase.html content
 		async function loadCoinPurchase() {
 			try {
-				// Fetch the payment.html file
+				// Fetch the coinPurchase.html file
 				const response = await fetch('coinPurchase.html');
 				if (!response.ok) {
 					throw new Error('Failed to load coinPurchase.html');
@@ -653,6 +655,38 @@
 				dynamicContent.innerHTML = htmlContent;
 			} catch (error) {
 				console.error('Error loading coinPurchase.html:', error);
+			}
+		}
+		// Function to load exchangeCoin.html content
+		async function loadExchangeCoin() {
+			try {
+				// Fetch the exchangeCoin.html file
+				const response = await fetch('exchangeCoin.html');
+				if (!response.ok) {
+					throw new Error('Failed to load exchangeCoin.html');
+				}
+				const htmlContent = await response.text();
+
+				const dynamicContent = document.getElementById('dynamicContent');
+				dynamicContent.innerHTML = htmlContent;
+			} catch (error) {
+				console.error('Error loading exchangeCoin.html:', error);
+			}
+		}
+		// Function to load staking.html content
+		async function loadStaking() {
+			try {
+				// Fetch the staking.html file
+				const response = await fetch('staking.html');
+				if (!response.ok) {
+					throw new Error('Failed to load staking.html');
+				}
+				const htmlContent = await response.text();
+
+				const dynamicContent = document.getElementById('dynamicContent');
+				dynamicContent.innerHTML = htmlContent;
+			} catch (error) {
+				console.error('Error loading staking.html:', error);
 			}
 		}
 

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../output.css" rel="stylesheet">
+    <title>Exchange Coin</title>
+</head>
+
+<body>
+    <div class="p-6 bg-white shadow rounded-lg">
+        <h2 class="text-xl font-bold mb-4">Exchange Coins</h2>
+
+        <div class="mb-4">
+            <label class="block font-medium">Exchange From <span class="text-red-500">*</span></label>
+            <div class="flex items-center justify-between border rounded-lg px-4 py-2 mt-1">
+                <input type="text" class="w-full focus:outline-none" placeholder="Enter amount">
+                <span class="text-gray-600">Available Balance : 0.02233478996499570000 BTC</span>
+                <select class="ml-2 bg-white border-l px-2">
+                    <option>Bitcoin</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="flex justify-center my-2">
+            <span class="text-2xl">&#8597;</span>
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium">Exchange To</label>
+            <div class="flex items-center justify-between border rounded-lg px-4 py-2 mt-1">
+                <input type="text" class="w-full focus:outline-none" placeholder="Enter amount">
+                <span class="text-gray-600">Available Balance : 1367.93608253946750000000 USDT</span>
+                <select class="ml-2 bg-white border-l px-2">
+                    <option>Tether USD (Omni Layer)</option>
+                </select>
+            </div>
+        </div>
+
+        <p class="text-gray-600 text-sm text-center mb-4">Rate: 1 BTC = 94694.8086747292 USDT</p>
+
+        <button
+            class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700">Exchange</button>
+    </div>
+
+</body>
+
+</html>
