@@ -225,57 +225,6 @@
         </div>
     </footer>
 
-
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-
-        //<!-- for services slider -->
-        document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('#howItWorks-slider', {
-                type: 'slide',
-                perPage: 1,
-                perMove: 1,
-                pagination: false,
-                arrows: false,
-            }).mount();
-
-            document.getElementById('prevSlide').addEventListener('click', function () {
-                splide.go('-1');
-            });
-
-            document.getElementById('nextSlide').addEventListener('click', function () {
-                splide.go('+1');
-            });
-        });
-    </script>
-    <!-- JavaScript for Testimonials Slider -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var splide = new Splide('#testimonials-slider', {
-                type: 'slide',
-                perPage: 1,
-                perMove: 1,
-                pagination: false,
-                arrows: false,
-            }).mount();
-
-            document.getElementById('prevTestimonial').addEventListener('click', function () {
-                splide.go('-1');
-            });
-
-            document.getElementById('nextTestimonial').addEventListener('click', function () {
-                splide.go('+1');
-            });
-        });
-    </script>
 </body>
 
 </html>
